@@ -1,8 +1,9 @@
-```python
-# Bharat Bhasha
+
+  # Bharat Bhasha
 # Indian Language Learning Project
 
 from languages import languages
+from quiz import quiz_questions, start_quiz
 
 
 def show_topic(language, topic):
@@ -56,7 +57,8 @@ while True:
             print("2. Common Words")
             print("3. Daily Phrases")
             print("4. Numbers")
-            print("5. Back to Language Menu")
+            print("5. Practice Quiz")
+            print("6. Back to Language Menu")
 
             topic_choice = input("\nEnter your choice: ")
 
@@ -73,6 +75,12 @@ while True:
                 show_topic(selected_language, "numbers")
 
             elif topic_choice == "5":
+                start_quiz(
+                    selected_language,
+                    quiz_questions[selected_language]
+                )
+
+            elif topic_choice == "6":
                 break
 
             else:
@@ -80,4 +88,3 @@ while True:
 
     except ValueError:
         print("\nPlease enter a valid number.")
-```
