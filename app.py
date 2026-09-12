@@ -1,27 +1,27 @@
-```python
 # Bharat Bhasha
 # Indian Language Learning Project
 
-print("=" * 45)
-print("             BHARAT BHASHA")
+print("=" * 50)
+print("              BHARAT BHASHA")
 print("       Learn Indian Languages")
-print("=" * 45)
+print("=" * 50)
 
 languages = {
-    1: "Hindi",
-    2: "Odia",
-    3: "Bengali",
-    4: "Punjabi",
-    5: "Telugu",
-    6: "Tamil",
-    7: "Marathi",
-    8: "Gujarati",
-    9: "Assamese",
-    10: "Bhojpuri",
-    11: "Haryanvi"
+    1: "English",
+    2: "Hindi",
+    3: "Odia",
+    4: "Bengali",
+    5: "Punjabi",
+    6: "Telugu",
+    7: "Tamil",
+    8: "Marathi",
+    9: "Gujarati",
+    10: "Assamese",
+    11: "Bhojpuri",
+    12: "Haryanvi"
 }
 
-print("\nChoose a language:\n")
+print("\nChoose a language to learn:\n")
 
 for number, language in languages.items():
     print(f"{number}. {language}")
@@ -30,50 +30,59 @@ try:
     choice = int(input("\nEnter your choice: "))
 
     if choice in languages:
+
         selected_language = languages[choice]
 
-        print("\n" + "=" * 45)
+        print("\n" + "=" * 50)
         print(f"You selected: {selected_language}")
-        print("=" * 45)
+        print("=" * 50)
 
         print("\nWhat would you like to learn?")
-        print("1. Basic Words")
-        print("2. Greetings")
+        print("1. Greetings")
+        print("2. Common Words")
         print("3. Daily Phrases")
         print("4. Numbers")
+        print("5. Practice Quiz")
+        print("6. Exit")
 
         topic = int(input("\nEnter your choice: "))
 
         if topic == 1:
-            print("\nBasic Words:")
+            print("\n--- Greetings ---")
             print("Hello")
-            print("Thank You")
+            print("Good Morning")
+            print("How are you?")
+            print("Thank you")
+
+        elif topic == 2:
+            print("\n--- Common Words ---")
             print("Yes")
             print("No")
             print("Water")
             print("Food")
-
-        elif topic == 2:
-            print("\nGreetings:")
-            print("Hello!")
-            print("Good Morning!")
-            print("Good Evening!")
-            print("How are you?")
+            print("Friend")
 
         elif topic == 3:
-            print("\nDaily Phrases:")
+            print("\n--- Daily Phrases ---")
             print("What is your name?")
             print("Where are you going?")
-            print("I am fine.")
-            print("See you tomorrow.")
+            print("I am fine")
+            print("See you tomorrow")
 
         elif topic == 4:
-            print("\nNumbers:")
+            print("\n--- Numbers ---")
             print("1 - One")
             print("2 - Two")
             print("3 - Three")
             print("4 - Four")
             print("5 - Five")
+
+        elif topic == 5:
+            print("\n--- Practice Quiz ---")
+            print("Quiz feature will be added soon!")
+
+        elif topic == 6:
+            print("\nThank you for using Bharat Bhasha!")
 
         else:
             print("\nInvalid topic choice.")
@@ -84,6 +93,6 @@ try:
 except ValueError:
     print("\nPlease enter a valid number.")
 
-print("\nThank you for using Bharat Bhasha!")
-```
-
+print("\n" + "=" * 50)
+print("Thank you for using Bharat Bhasha!")
+print("=" * 50)
