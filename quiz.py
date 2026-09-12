@@ -326,3 +326,4 @@ def start_quiz(language, questions):
 
     print("=" * 50)
        
+return score
