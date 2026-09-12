@@ -1,98 +1,83 @@
+```python
 # Bharat Bhasha
 # Indian Language Learning Project
+
+from languages import languages
+
+
+def show_topic(language, topic):
+    data = languages[language][topic]
+
+    print("\n" + "=" * 50)
+    print(f"{topic.upper()} - {language}")
+    print("=" * 50)
+
+    for english, translation in data.items():
+        print(f"{english}  →  {translation}")
+
 
 print("=" * 50)
 print("              BHARAT BHASHA")
 print("       Learn Indian Languages")
 print("=" * 50)
 
-languages = {
-    1: "English",
-    2: "Hindi",
-    3: "Odia",
-    4: "Bengali",
-    5: "Punjabi",
-    6: "Telugu",
-    7: "Tamil",
-    8: "Marathi",
-    9: "Gujarati",
-    10: "Assamese",
-    11: "Bhojpuri",
-    12: "Haryanvi"
-}
+language_list = list(languages.keys())
 
-print("\nChoose a language to learn:\n")
+while True:
 
-for number, language in languages.items():
-    print(f"{number}. {language}")
+    print("\nChoose a language to learn:\n")
 
-try:
-    choice = int(input("\nEnter your choice: "))
+    for i, language in enumerate(language_list, 1):
+        print(f"{i}. {language}")
 
-    if choice in languages:
+    print("0. Exit")
 
-        selected_language = languages[choice]
+    try:
+        choice = int(input("\nEnter your choice: "))
+
+        if choice == 0:
+            print("\nThank you for using Bharat Bhasha!")
+            break
+
+        if choice < 1 or choice > len(language_list):
+            print("\nInvalid language choice.")
+            continue
+
+        selected_language = language_list[choice - 1]
 
         print("\n" + "=" * 50)
         print(f"You selected: {selected_language}")
         print("=" * 50)
 
-        print("\nWhat would you like to learn?")
-        print("1. Greetings")
-        print("2. Common Words")
-        print("3. Daily Phrases")
-        print("4. Numbers")
-        print("5. Practice Quiz")
-        print("6. Exit")
+        while True:
 
-        topic = int(input("\nEnter your choice: "))
+            print("\nWhat would you like to learn?")
+            print("1. Greetings")
+            print("2. Common Words")
+            print("3. Daily Phrases")
+            print("4. Numbers")
+            print("5. Back to Language Menu")
 
-        if topic == 1:
-            print("\n--- Greetings ---")
-            print("Hello")
-            print("Good Morning")
-            print("How are you?")
-            print("Thank you")
+            topic_choice = input("\nEnter your choice: ")
 
-        elif topic == 2:
-            print("\n--- Common Words ---")
-            print("Yes")
-            print("No")
-            print("Water")
-            print("Food")
-            print("Friend")
+            if topic_choice == "1":
+                show_topic(selected_language, "greetings")
 
-        elif topic == 3:
-            print("\n--- Daily Phrases ---")
-            print("What is your name?")
-            print("Where are you going?")
-            print("I am fine")
-            print("See you tomorrow")
+            elif topic_choice == "2":
+                show_topic(selected_language, "common_words")
 
-        elif topic == 4:
-            print("\n--- Numbers ---")
-            print("1 - One")
-            print("2 - Two")
-            print("3 - Three")
-            print("4 - Four")
-            print("5 - Five")
+            elif topic_choice == "3":
+                show_topic(selected_language, "daily_phrases")
 
-        elif topic == 5:
-            print("\n--- Practice Quiz ---")
-            print("Quiz feature will be added soon!")
+            elif topic_choice == "4":
+                show_topic(selected_language, "numbers")
 
-        elif topic == 6:
-            print("\nThank you for using Bharat Bhasha!")
+            elif topic_choice == "5":
+                break
 
-        else:
-            print("\nInvalid topic choice.")
+            else:
+                print("\nInvalid topic choice.")
 
-    else:
-        print("\nInvalid language choice.")
-
-except ValueError:
-    print("\nPlease enter a valid number.")
-
-print("\n" + "=" * 50)
-print("Thank you for using Bharat Bhasha!")
-print("=" * 50)
+    except ValueError:
+        print("\nPlease enter a valid number.")
+```
