@@ -1,9 +1,9 @@
-
-  # Bharat Bhasha
+# Bharat Bhasha
 # Indian Language Learning Project
 
 from languages import languages
 from quiz import quiz_questions, start_quiz
+from progress import mark_topic_completed, save_quiz_score, show_progress
 
 
 def show_topic(language, topic):
@@ -15,6 +15,8 @@ def show_topic(language, topic):
 
     for english, translation in data.items():
         print(f"{english}  →  {translation}")
+
+    mark_topic_completed(language, topic)
 
 
 print("=" * 50)
@@ -58,7 +60,8 @@ while True:
             print("3. Daily Phrases")
             print("4. Numbers")
             print("5. Practice Quiz")
-            print("6. Back to Language Menu")
+            print("6. View Progress")
+            print("7. Back to Language Menu")
 
             topic_choice = input("\nEnter your choice: ")
 
@@ -75,12 +78,16 @@ while True:
                 show_topic(selected_language, "numbers")
 
             elif topic_choice == "5":
-                start_quiz(
-                    selected_language,
-                    quiz_questions[selected_language]
-                )
+                questions = quiz_questions[selected_language]
+
+                score = start_quiz(selected_language, questions)
+
+                save_quiz_score(selected_language, score)
 
             elif topic_choice == "6":
+                show_progress(selected_language)
+
+            elif topic_choice == "7":
                 break
 
             else:
@@ -88,3 +95,4 @@ while True:
 
     except ValueError:
         print("\nPlease enter a valid number.")
+ 
