@@ -1,10 +1,5 @@
 import streamlit as st
 
-
-# ============================================================
-# IMPORTS
-# ============================================================
-
 from languages import languages
 from quiz import quiz_questions
 
@@ -48,9 +43,9 @@ def mark_topic_completed(language, topic):
 
 def save_quiz_score(language, score):
 
-    current_best = st.session_state.progress[language]["quiz_score"]
+    old_score = st.session_state.progress[language]["quiz_score"]
 
-    if score > current_best:
+    if score > old_score:
 
         st.session_state.progress[language]["quiz_score"] = score
 
@@ -63,232 +58,26 @@ initialize_progress()
 
 
 # ============================================================
-# CUSTOM CSS
+# SIMPLE CSS
 # ============================================================
 
 st.markdown("""
 <style>
 
-/* ==========================================================
-   MAIN PAGE
-   ========================================================== */
-
 .stApp {
     background-color: #f5f7fb;
 }
 
-
-/* ==========================================================
-   SIDEBAR
-   ========================================================== */
-
 section[data-testid="stSidebar"] {
-    background-color: #ffffff !important;
+    background-color: white;
 }
 
 section[data-testid="stSidebar"] * {
     color: #222222 !important;
 }
 
-section[data-testid="stSidebar"] h1,
-section[data-testid="stSidebar"] h2,
-section[data-testid="stSidebar"] h3,
-section[data-testid="stSidebar"] p,
-section[data-testid="stSidebar"] label {
+h1, h2, h3, h4 {
     color: #222222 !important;
-}
-
-
-/* Sidebar radio */
-
-section[data-testid="stSidebar"] div[data-testid="stRadio"] label {
-    color: #222222 !important;
-}
-
-section[data-testid="stSidebar"] div[data-testid="stRadio"] label p {
-    color: #222222 !important;
-}
-
-
-/* Sidebar selectbox */
-
-section[data-testid="stSidebar"] div[data-testid="stSelectbox"] label {
-    color: #222222 !important;
-}
-
-section[data-testid="stSidebar"] div[data-baseweb="select"] {
-    background-color: #ffffff !important;
-}
-
-section[data-testid="stSidebar"] div[data-baseweb="select"] > div {
-    background-color: #ffffff !important;
-    color: #222222 !important;
-}
-
-
-/* ==========================================================
-   GENERAL TEXT
-   ========================================================== */
-
-.stApp h1,
-.stApp h2,
-.stApp h3,
-.stApp h4 {
-    color: #222222 !important;
-}
-
-.stMarkdown p {
-    color: #222222 !important;
-}
-
-
-/* ==========================================================
-   HERO
-   ========================================================== */
-
-.hero {
-    background: linear-gradient(
-        135deg,
-        #ff9933,
-        #ffffff,
-        #138808
-    );
-
-    padding: 45px;
-
-    border-radius: 25px;
-
-    text-align: center;
-
-    margin-bottom: 35px;
-}
-
-.hero-title {
-    font-size: 48px;
-    font-weight: 800;
-    color: #111111 !important;
-    margin-bottom: 15px;
-}
-
-.hero-subtitle {
-    font-size: 20px;
-    color: #222222 !important;
-}
-
-
-/* ==========================================================
-   HOME CARDS
-   ========================================================== */
-
-.card {
-    background-color: #ffffff;
-
-    padding: 25px;
-
-    border-radius: 18px;
-
-    margin-bottom: 20px;
-
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-}
-
-.card-title {
-    font-size: 25px;
-    font-weight: 700;
-    color: #222222 !important;
-
-    margin-bottom: 10px;
-}
-
-.card-text {
-    font-size: 16px;
-    color: #333333 !important;
-}
-
-
-/* ==========================================================
-   TOPIC CARDS
-   ========================================================== */
-
-.topic-card {
-    background-color: #ffffff;
-
-    padding: 20px;
-
-    border-radius: 15px;
-
-    margin-top: 12px;
-    margin-bottom: 12px;
-
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
-}
-
-.topic-title {
-    font-size: 21px;
-    font-weight: 700;
-    color: #222222 !important;
-}
-
-.topic-translation {
-    font-size: 19px;
-    color: #333333 !important;
-}
-
-
-/* ==========================================================
-   QUIZ
-   ========================================================== */
-
-.quiz-card {
-    background-color: #ffffff;
-
-    padding: 20px;
-
-    border-radius: 16px;
-
-    margin-bottom: 15px;
-
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
-}
-
-
-/* Quiz question text */
-
-div[data-testid="stRadio"] label {
-    color: #222222 !important;
-}
-
-div[data-testid="stRadio"] label p {
-    color: #222222 !important;
-}
-
-div[data-testid="stRadio"] span {
-    color: #222222 !important;
-}
-
-
-/* ==========================================================
-   RESULT
-   ========================================================== */
-
-.result-card {
-    background-color: #ffffff;
-
-    padding: 30px;
-
-    border-radius: 20px;
-
-    text-align: center;
-
-    margin-top: 25px;
-
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-}
-
-.result-score {
-    font-size: 50px;
-    font-weight: 800;
-    color: #111111 !important;
 }
 
 </style>
@@ -303,7 +92,7 @@ st.sidebar.title("🇮🇳 Bharat Bhasha")
 
 st.sidebar.write("Learn Indian Languages")
 
-st.sidebar.markdown("---")
+st.sidebar.divider()
 
 st.sidebar.subheader("Navigate")
 
@@ -317,7 +106,7 @@ page = st.sidebar.radio(
     ]
 )
 
-st.sidebar.markdown("---")
+st.sidebar.divider()
 
 selected_language = st.sidebar.selectbox(
     "🌐 Choose Language",
@@ -331,89 +120,58 @@ selected_language = st.sidebar.selectbox(
 
 if page == "🏠 Home":
 
-    st.markdown("""
-<div class="hero">
+    st.title("🇮🇳 Bharat Bhasha")
 
-    <div class="hero-title">
-        🇮🇳 Bharat Bhasha
-    </div>
+    st.subheader(
+        "Discover and learn Indian languages"
+    )
 
-    <div class="hero-subtitle">
-        Discover and learn Indian languages
-        in a simple and interactive way.
-    </div>
+    st.write(
+        "Learn useful words, greetings, daily phrases "
+        "and numbers from different Indian languages."
+    )
 
-</div>
-""", unsafe_allow_html=True)
-
+    st.divider()
 
     st.header("🌏 Learn a New Indian Language")
 
     st.write(
-        "Bharat Bhasha helps you learn useful words, "
-        "greetings, daily phrases and numbers from "
-        "different Indian languages."
+        "Choose a language from the sidebar and start "
+        "your learning journey."
     )
 
+    st.divider()
 
     col1, col2, col3 = st.columns(3)
 
-
     with col1:
 
-        st.markdown("""
-<div class="card">
+        st.subheader("📚 Learn")
 
-    <div class="card-title">
-        📚 Learn
-    </div>
-
-    <div class="card-text">
-        Learn greetings, common words,
-        daily phrases and numbers.
-    </div>
-
-</div>
-""", unsafe_allow_html=True)
-
+        st.write(
+            "Learn greetings, common words, "
+            "daily phrases and numbers."
+        )
 
     with col2:
 
-        st.markdown("""
-<div class="card">
+        st.subheader("🧠 Practice")
 
-    <div class="card-title">
-        🧠 Practice
-    </div>
-
-    <div class="card-text">
-        Test your knowledge using
-        language-based quizzes.
-    </div>
-
-</div>
-""", unsafe_allow_html=True)
-
+        st.write(
+            "Test your knowledge with "
+            "language-based quizzes."
+        )
 
     with col3:
 
-        st.markdown("""
-<div class="card">
+        st.subheader("📊 Track Progress")
 
-    <div class="card-title">
-        📊 Track Progress
-    </div>
+        st.write(
+            "Complete learning topics and "
+            "track your best quiz score."
+        )
 
-    <div class="card-text">
-        Complete topics and track
-        your best quiz score.
-    </div>
-
-</div>
-""", unsafe_allow_html=True)
-
-
-    st.markdown("---")
+    st.divider()
 
     st.header("🌐 Available Languages")
 
@@ -434,25 +192,18 @@ if page == "🏠 Home":
 
 elif page == "📚 Learn":
 
-    st.title("📚 Learn " + selected_language)
+    st.title(f"📚 Learn {selected_language}")
 
     st.write(
-        "Choose a topic and start learning useful "
-        "words and phrases."
+        "Choose a topic and start learning."
     )
 
-
     topic_names = {
-
         "greetings": "👋 Greetings",
-
         "common_words": "📝 Common Words",
-
         "daily_phrases": "💬 Daily Phrases",
-
         "numbers": "🔢 Numbers"
     }
-
 
     topic = st.selectbox(
         "Choose a topic",
@@ -460,42 +211,29 @@ elif page == "📚 Learn":
         format_func=lambda x: topic_names[x]
     )
 
+    st.divider()
 
-    st.markdown("---")
-
-    st.subheader(topic_names[topic])
-
+    st.header(topic_names[topic])
 
     data = languages[selected_language][topic]
 
-
     for english, translation in data.items():
 
-        st.markdown(
-            f"""
-<div class="topic-card">
+        col1, col2 = st.columns(2)
 
-    <div class="topic-title">
-        {english}
-    </div>
+        with col1:
 
-    <div class="topic-translation">
-        ➜ {translation}
-    </div>
+            st.write(f"**English:** {english}")
 
-</div>
-""",
-            unsafe_allow_html=True
-        )
+        with col2:
 
+            st.write(f"**{selected_language}:** {translation}")
 
-    st.markdown("---")
-
+        st.divider()
 
     completed = st.session_state.progress[
         selected_language
     ][topic]
-
 
     if completed:
 
@@ -529,139 +267,99 @@ elif page == "📚 Learn":
 elif page == "🧠 Quiz":
 
     st.title(
-        "🧠 " +
-        selected_language +
-        " Practice Quiz"
+        f"🧠 {selected_language} Practice Quiz"
     )
-
 
     questions = quiz_questions[
         selected_language
     ]
-
 
     st.write(
         f"Test your knowledge with "
         f"**{len(questions)} questions**."
     )
 
+    st.divider()
 
-    st.markdown("---")
+    answers = []
 
+    for i, question in enumerate(questions):
 
-    with st.form(
-        key=f"quiz_form_{selected_language}"
-    ):
-
-        answers = []
-
-
-        for i, question in enumerate(questions):
-
-            st.markdown(
-                f"""
-<div class="quiz-card">
-
-    <b>Question {i + 1}</b>
-
-</div>
-""",
-                unsafe_allow_html=True
-            )
-
-
-            option_keys = list(
-                question["options"].keys()
-            )
-
-
-            option_labels = []
-
-
-            for key in option_keys:
-
-                label = (
-                    f"{key}. "
-                    f"{question['options'][key]}"
-                )
-
-                option_labels.append(label)
-
-
-            selected_answer = st.radio(
-                question["question"],
-                option_labels,
-                key=f"quiz_{selected_language}_{i}"
-            )
-
-
-            answers.append(
-                selected_answer
-            )
-
-
-        submitted = st.form_submit_button(
-            "🚀 Submit Quiz"
+        st.subheader(
+            f"Question {i + 1}"
         )
 
+        st.write(
+            question["question"]
+        )
 
-    if submitted:
+        option_keys = list(
+            question["options"].keys()
+        )
+
+        option_labels = []
+
+        for key in option_keys:
+
+            option_labels.append(
+                f"{key}. {question['options'][key]}"
+            )
+
+        answer = st.radio(
+            "Choose your answer:",
+            option_labels,
+            key=f"quiz_{selected_language}_{i}"
+        )
+
+        answers.append(answer)
+
+        st.divider()
+
+    if st.button(
+        "🚀 Submit Quiz",
+        type="primary"
+    ):
 
         score = 0
-
 
         for i, question in enumerate(questions):
 
             correct_key = question["answer"]
 
-
-            correct_text = question[
-                "options"
-            ][correct_key]
-
+            correct_text = question["options"][
+                correct_key
+            ]
 
             correct_answer = (
-                f"{correct_key}. "
-                f"{correct_text}"
+                f"{correct_key}. {correct_text}"
             )
-
 
             if answers[i] == correct_answer:
 
                 score += 1
 
-
         percentage = (
-            score /
-            len(questions)
+            score / len(questions)
         ) * 100
-
 
         new_best = save_quiz_score(
             selected_language,
             score
         )
 
-
-        st.markdown(
-            f"""
-<div class="result-card">
-
-    <div class="result-score">
-        {score}/{len(questions)}
-    </div>
-
-    <h3>
-        {percentage:.0f}%
-    </h3>
-
-</div>
-""",
-            unsafe_allow_html=True
+        st.success(
+            f"🎉 Quiz completed! Your score is "
+            f"**{score}/{len(questions)}**"
         )
 
+        st.metric(
+            "Your Percentage",
+            f"{percentage:.0f}%"
+        )
 
         if percentage == 100:
+
+            st.balloons()
 
             st.success(
                 "🏆 Excellent! Perfect score!"
@@ -679,7 +377,6 @@ elif page == "🧠 Quiz":
                 "📚 Keep learning and try again!"
             )
 
-
         if new_best:
 
             st.info(
@@ -688,10 +385,13 @@ elif page == "🧠 Quiz":
 
         else:
 
+            best = st.session_state.progress[
+                selected_language
+            ]["quiz_score"]
+
             st.info(
                 f"⭐ Best score: "
-                f"{st.session_state.progress[selected_language]['quiz_score']}"
-                f"/{len(questions)}"
+                f"{best}/{len(questions)}"
             )
 
 
@@ -703,31 +403,22 @@ elif page == "📊 Progress":
 
     st.title("📊 Your Learning Progress")
 
-
     st.subheader(
-        "🌐 " + selected_language
+        f"🌐 {selected_language}"
     )
-
 
     data = st.session_state.progress[
         selected_language
     ]
 
-
     topics = [
-
         ("greetings", "👋 Greetings"),
-
         ("common_words", "📝 Common Words"),
-
         ("daily_phrases", "💬 Daily Phrases"),
-
         ("numbers", "🔢 Numbers")
     ]
 
-
     completed = 0
-
 
     for topic_key, topic_name in topics:
 
@@ -745,61 +436,43 @@ elif page == "📊 Progress":
                 f"⭕ {topic_name} — Not completed"
             )
 
-
-    st.markdown("---")
-
+    st.divider()
 
     progress_percentage = (
-        completed /
-        len(topics)
+        completed / len(topics)
     ) * 100
 
-
-    st.subheader(
-        "📈 Learning Progress"
-    )
-
+    st.subheader("📈 Learning Progress")
 
     st.progress(
         progress_percentage / 100
     )
-
 
     st.write(
         f"**{completed}/{len(topics)} topics completed "
         f"({progress_percentage:.0f}%)**"
     )
 
+    st.divider()
 
-    st.markdown("---")
-
-
-    st.subheader(
-        "🧠 Quiz Performance"
-    )
-
+    st.subheader("🧠 Quiz Performance")
 
     questions = quiz_questions[
         selected_language
     ]
 
-
     best_score = data["quiz_score"]
-
 
     st.metric(
         "⭐ Best Quiz Score",
         f"{best_score}/{len(questions)}"
     )
 
-
     if best_score > 0:
 
         quiz_percentage = (
-            best_score /
-            len(questions)
+            best_score / len(questions)
         ) * 100
-
 
         st.write(
             f"Best percentage: "
@@ -812,9 +485,7 @@ elif page == "📊 Progress":
             "Take the quiz to record your best score."
         )
 
-
-    st.markdown("---")
-
+    st.divider()
 
     st.caption(
         "💡 Progress is stored for the current "
