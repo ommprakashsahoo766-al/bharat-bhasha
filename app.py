@@ -61,64 +61,46 @@ initialize_progress()
 # SIMPLE CSS
 # ============================================================
 
-st.markdown("""
-<style>
+st.markdown(
+    """
+    <style>
 
-/* Main background */
+    .stApp {
+        background-color: #f5f7fb;
+    }
 
-.stApp {
-    background-color: #f5f7fb;
-}
+    section[data-testid="stSidebar"] {
+        background-color: #ffffff !important;
+    }
 
+    section[data-testid="stSidebar"] h1,
+    section[data-testid="stSidebar"] h2,
+    section[data-testid="stSidebar"] h3,
+    section[data-testid="stSidebar"] p,
+    section[data-testid="stSidebar"] label {
+        color: #222222 !important;
+    }
 
-/* Sidebar */
+    h1, h2, h3, h4 {
+        color: #222222 !important;
+    }
 
-section[data-testid="stSidebar"] {
-    background-color: #ffffff !important;
-}
+    p {
+        color: #222222 !important;
+    }
 
-section[data-testid="stSidebar"] h1,
-section[data-testid="stSidebar"] h2,
-section[data-testid="stSidebar"] h3,
-section[data-testid="stSidebar"] p,
-section[data-testid="stSidebar"] label {
-    color: #222222 !important;
-}
+    div[data-baseweb="select"] {
+        background-color: #ffffff !important;
+    }
 
+    div[data-baseweb="select"] * {
+        color: #222222 !important;
+    }
 
-/* Main headings */
-
-h1, h2, h3, h4 {
-    color: #222222 !important;
-}
-
-
-/* Normal text */
-
-p {
-    color: #222222 !important;
-}
-
-
-/* Selectbox text */
-
-div[data-baseweb="select"] {
-    background-color: #ffffff !important;
-}
-
-div[data-baseweb="select"] * {
-    color: #222222 !important;
-}
-
-
-/* Buttons */
-
-.stButton button {
-    font-weight: 600;
-}
-
-</style>
-""", unsafe_allow_html=True)
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 
 # ============================================================
@@ -174,8 +156,8 @@ if page == "🏠 Home":
     st.header("🌏 Learn a New Indian Language")
 
     st.write(
-        "Choose a language and start learning "
-        "greetings, common words, daily phrases "
+        "Choose a language from the sidebar and start "
+        "learning greetings, common words, daily phrases "
         "and numbers."
     )
 
@@ -222,9 +204,7 @@ if page == "🏠 Home":
 
         with columns[i % 4]:
 
-            st.info(
-                f"🇮🇳 {language}"
-            )
+            st.info(f"🇮🇳 {language}")
 
 
 # ============================================================
@@ -260,27 +240,35 @@ elif page == "📚 Learn":
         topic_names[topic]
     )
 
-    data = languages[
-        selected_language
-    ][topic]
+    data = languages[selected_language][topic]
 
-for native_word, english_meaning in data.items():
+    # Your languages.py stores:
+    # Native language word -> English meaning
+    #
+    # Example:
+    # "Sat Sri Akaal" -> "Hello"
+    #
+    # Therefore we display:
+    # English: Hello
+    # Punjabi: Sat Sri Akaal
 
-    col1, col2 = st.columns(2)
+    for native_word, english_meaning in data.items():
 
-    with col1:
+        col1, col2 = st.columns(2)
 
-        st.write(
-            f"**English:** {english_meaning}"
-        )
+        with col1:
 
-    with col2:
+            st.write(
+                f"**English:** {english_meaning}"
+            )
 
-        st.write(
-            f"**{selected_language}:** {native_word}"
-        )
+        with col2:
 
-    st.divider()
+            st.write(
+                f"**{selected_language}:** {native_word}"
+            )
+
+        st.divider()
 
     completed = st.session_state.progress[
         selected_language
@@ -335,7 +323,7 @@ elif page == "🧠 Quiz":
     answers = []
 
     # --------------------------------------------------------
-    # SHOW QUESTIONS
+    # QUESTIONS
     # --------------------------------------------------------
 
     for i, question in enumerate(questions):
@@ -344,12 +332,10 @@ elif page == "🧠 Quiz":
             f"Question {i + 1}"
         )
 
-        # Question text
         st.write(
             question["question"]
         )
 
-        # Create visible answer labels
         option_keys = list(
             question["options"].keys()
         )
@@ -362,7 +348,6 @@ elif page == "🧠 Quiz":
                 f"{key}. {question['options'][key]}"
             )
 
-        # Dropdown instead of radio
         selected_answer = st.selectbox(
             "Choose your answer:",
             option_labels,
@@ -375,7 +360,6 @@ elif page == "🧠 Quiz":
 
         st.divider()
 
-
     # --------------------------------------------------------
     # SUBMIT QUIZ
     # --------------------------------------------------------
@@ -387,7 +371,6 @@ elif page == "🧠 Quiz":
 
         score = 0
 
-        # Check every answer
         for i, question in enumerate(questions):
 
             correct_key = question["answer"]
@@ -405,24 +388,15 @@ elif page == "🧠 Quiz":
 
                 score += 1
 
-
-        # Percentage
         percentage = (
             score /
             len(questions)
         ) * 100
 
-
-        # Save best score
         new_best = save_quiz_score(
             selected_language,
             score
         )
-
-
-        # ----------------------------------------------------
-        # RESULT
-        # ----------------------------------------------------
 
         st.divider()
 
@@ -437,7 +411,6 @@ elif page == "🧠 Quiz":
             "Percentage",
             f"{percentage:.0f}%"
         )
-
 
         if percentage == 100:
 
@@ -458,7 +431,6 @@ elif page == "🧠 Quiz":
             st.warning(
                 "📚 Keep learning and try again!"
             )
-
 
         if new_best:
 
@@ -496,24 +468,14 @@ elif page == "📊 Progress":
         selected_language
     ]
 
-
-    # --------------------------------------------------------
-    # TOPICS
-    # --------------------------------------------------------
-
     topics = [
-
         ("greetings", "👋 Greetings"),
-
         ("common_words", "📝 Common Words"),
-
         ("daily_phrases", "💬 Daily Phrases"),
-
         ("numbers", "🔢 Numbers")
     ]
 
     completed = 0
-
 
     for topic_key, topic_name in topics:
 
@@ -531,63 +493,42 @@ elif page == "📊 Progress":
                 f"⭕ {topic_name} — Not completed"
             )
 
-
     st.divider()
-
-
-    # --------------------------------------------------------
-    # LEARNING PROGRESS
-    # --------------------------------------------------------
 
     progress_percentage = (
         completed /
         len(topics)
     ) * 100
 
-
     st.subheader(
         "📈 Learning Progress"
     )
-
 
     st.progress(
         progress_percentage / 100
     )
 
-
     st.write(
-        f"{completed}/{len(topics)} topics completed "
-        f"({progress_percentage:.0f}%)"
+        f"**{completed}/{len(topics)} topics completed "
+        f"({progress_percentage:.0f}%)**"
     )
 
-
     st.divider()
-
-
-    # --------------------------------------------------------
-    # QUIZ PROGRESS
-    # --------------------------------------------------------
 
     st.subheader(
         "🧠 Quiz Performance"
     )
 
-
     questions = quiz_questions[
         selected_language
     ]
 
-
-    best_score = data[
-        "quiz_score"
-    ]
-
+    best_score = data["quiz_score"]
 
     st.metric(
         "⭐ Best Quiz Score",
         f"{best_score}/{len(questions)}"
     )
-
 
     if best_score > 0:
 
@@ -598,19 +539,16 @@ elif page == "📊 Progress":
 
         st.write(
             f"Best percentage: "
-            f"{quiz_percentage:.0f}%"
+            f"**{quiz_percentage:.0f}%**"
         )
 
     else:
 
         st.info(
-            "Take the quiz to record "
-            "your best score."
+            "Take the quiz to record your best score."
         )
 
-
     st.divider()
-
 
     st.caption(
         "💡 Progress is stored for the current "
