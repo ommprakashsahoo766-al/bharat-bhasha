@@ -1,7 +1,175 @@
+import streamlit as st
+
+from languages import languages
+from quiz import quiz_questions
+
+from progress import (
+    progress,
+    initialize_progress,
+    mark_topic_completed,
+    save_quiz_score
+)
+
+
+# --------------------------------------------------
+# PAGE SETTINGS
+# --------------------------------------------------
+
+st.set_page_config(
+    page_title="Bharat Bhasha",
+    page_icon="🇮🇳",
+    layout="wide"
+)
+
+
+# --------------------------------------------------
+# TITLE
+# --------------------------------------------------
+
+st.title("🇮🇳 Bharat Bhasha")
+st.subheader("Learn Indian Languages Easily")
+
+
+# --------------------------------------------------
+# SIDEBAR MENU
+# --------------------------------------------------
+
+st.sidebar.title("📚 Menu")
+
+page = st.sidebar.radio(
+    "Choose an option:",
+    [
+        "Home",
+        "Learn",
+        "Quiz",
+        "Progress"
+    ]
+)
+
+
+# ==================================================
+# HOME PAGE
+# ==================================================
+
+if page == "Home":
+
+    st.header("Welcome to Bharat Bhasha! 🇮🇳")
+
+    st.write(
+        "Bharat Bhasha is an Indian language learning platform "
+        "designed to help you learn different Indian languages "
+        "in a simple and interactive way."
+    )
+
+    st.divider()
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.metric(
+            "🇮🇳 Languages",
+            len(languages)
+        )
+
+    with col2:
+        st.metric(
+            "📚 Learning Topics",
+            "4"
+        )
+
+    with col3:
+        st.metric(
+            "🧠 Quiz Questions",
+            "10"
+        )
+
+    st.divider()
+
+    st.header("🌐 Available Languages")
+
+    language_names = list(languages.keys())
+
+    for language in language_names:
+
+        st.write(f"• **{language}**")
+
+    st.divider()
+
+    st.info(
+        "💡 Choose **Learn** from the sidebar to start learning!"
+    )
+
+
+# ==================================================
+# LEARN PAGE
+# ==================================================
+
+elif page == "Learn":
+
+    st.header("📖 Learn a Language")
+
+    # Select language
+    language = st.selectbox(
+        "Select a language:",
+        list(languages.keys()),
+        key="learn_language"
+    )
+
+    # Get topics
+    topics = languages[language]
+
+    topic_names = list(topics.keys())
+
+    # Select topic
+    topic = st.selectbox(
+        "Select a topic:",
+        topic_names,
+        key="learn_topic"
+    )
+
+    st.divider()
+
+    st.header(
+        f"📚 {topic.replace('_', ' ').title()}"
+    )
+
+    data = topics[topic]
+
+    # Display vocabulary
+    for word, meaning in data.items():
+
+        st.write(
+            f"**{word}** → {meaning}"
+        )
+
+    st.divider()
+
+    # Mark topic completed
+    if st.button(
+        "✅ Mark Topic as Completed",
+        key=f"complete_{language}_{topic}"
+    ):
+
+        mark_topic_completed(
+            language,
+            topic
+        )
+
+        st.success(
+            f"🎉 {topic.replace('_', ' ').title()} "
+            f"completed for {language}!"
+        )
+
+
+# ==================================================
+# QUIZ PAGE
+# ==================================================
+
 elif page == "Quiz":
 
     st.header("🧠 Language Quiz")
 
+    # Select language
     language = st.selectbox(
         "Select a language:",
         list(quiz_questions.keys()),
@@ -10,35 +178,56 @@ elif page == "Quiz":
 
     questions = quiz_questions[language]
 
+    # Check whether questions exist
     if len(questions) == 0:
-        st.error("No quiz questions available for this language.")
+
+        st.error(
+            "❌ No quiz questions available for this language."
+        )
 
     else:
-        st.write(f"### 🇮🇳 {language} Quiz")
-        st.info(f"Test your knowledge with {len(questions)} questions!")
 
-        # Create a unique result key for each language
+        st.write(
+            f"### 🇮🇳 {language} Quiz"
+        )
+
+        st.info(
+            f"Test your knowledge with "
+            f"**{len(questions)} questions!**"
+        )
+
+        # Unique result key
         result_key = f"quiz_result_{language}"
 
-        # Quiz form
-        with st.form(f"quiz_form_{language}"):
+        # --------------------------------------------------
+        # QUIZ FORM
+        # --------------------------------------------------
+
+        with st.form(
+            f"quiz_form_{language}"
+        ):
 
             answers = []
 
             for i, question in enumerate(questions):
 
                 st.write(
-                    f"**Question {i + 1}/{len(questions)}**"
+                    f"### Question {i + 1}/{len(questions)}"
                 )
 
-                st.write(question["question"])
+                st.write(
+                    question["question"]
+                )
 
                 options = question["options"]
 
                 selected = st.radio(
                     "Choose your answer:",
                     list(options.keys()),
-                    format_func=lambda x: f"{x}. {options[x]}",
+
+                    format_func=lambda x:
+                    f"{x}. {options[x]}",
+
                     key=f"quiz_{language}_{i}"
                 )
 
@@ -46,11 +235,16 @@ elif page == "Quiz":
 
                 st.divider()
 
+            # Submit button
             submitted = st.form_submit_button(
                 "🚀 Submit Quiz"
             )
 
-        # When user submits
+
+        # --------------------------------------------------
+        # CALCULATE RESULT
+        # --------------------------------------------------
+
         if submitted:
 
             score = 0
@@ -58,27 +252,43 @@ elif page == "Quiz":
             for i, question in enumerate(questions):
 
                 if answers[i] == question["answer"]:
+
                     score += 1
 
             # Save best score
-            save_quiz_score(language, score)
+            save_quiz_score(
+                language,
+                score
+            )
 
-            percentage = (score / len(questions)) * 100
+            # Calculate percentage
+            percentage = (
+                score / len(questions)
+            ) * 100
 
-            # Save result
+            # Store result in session
             st.session_state[result_key] = {
+
                 "score": score,
+
                 "percentage": percentage,
+
                 "answers": answers,
+
                 "questions": questions
             }
 
-        # Show result if quiz has been submitted
+
+        # --------------------------------------------------
+        # SHOW RESULT
+        # --------------------------------------------------
+
         if result_key in st.session_state:
 
             result = st.session_state[result_key]
 
             score = result["score"]
+
             percentage = result["percentage"]
 
             st.divider()
@@ -87,55 +297,82 @@ elif page == "Quiz":
 
             # Score
             st.success(
-                f"Your Score: {score}/{len(questions)}"
+                f"Your Score: "
+                f"{score}/{len(questions)}"
             )
 
-            st.progress(percentage / 100)
+            # Progress bar
+            st.progress(
+                percentage / 100
+            )
 
             st.write(
-                f"### 📊 Percentage: {percentage:.0f}%"
+                f"### 📊 Percentage: "
+                f"{percentage:.0f}%"
             )
 
-            # Performance message
+
+            # --------------------------------------------------
+            # PERFORMANCE MESSAGE
+            # --------------------------------------------------
+
             if percentage == 100:
 
                 st.balloons()
 
                 st.success(
-                    "🎉 Perfect Score! You have mastered this quiz!"
+                    "🎉 Perfect Score! "
+                    "You have mastered this quiz!"
                 )
 
             elif percentage >= 80:
 
                 st.success(
-                    "🔥 Excellent! Your language knowledge is very strong!"
+                    "🔥 Excellent! "
+                    "Your language knowledge is very strong!"
                 )
 
             elif percentage >= 60:
 
                 st.info(
-                    "👍 Good job! Keep practicing to improve."
+                    "👍 Good job! "
+                    "Keep practicing to improve."
                 )
 
             else:
 
                 st.warning(
-                    "💪 Keep learning! Try the quiz again."
+                    "💪 Keep learning! "
+                    "Try the quiz again."
                 )
 
-            # Answer review
+
+            # --------------------------------------------------
+            # ANSWER REVIEW
+            # --------------------------------------------------
+
             st.divider()
 
             st.header("📝 Answer Review")
 
-            for i, question in enumerate(result["questions"]):
+            for i, question in enumerate(
+                result["questions"]
+            ):
 
                 user_answer = result["answers"][i]
+
                 correct_answer = question["answer"]
 
-                user_text = question["options"][user_answer]
-                correct_text = question["options"][correct_answer]
+                user_text = question["options"][
+                    user_answer
+                ]
 
+                correct_text = question["options"][
+                    correct_answer
+                ]
+
+
+                # Correct answer
                 if user_answer == correct_answer:
 
                     st.success(
@@ -143,9 +380,12 @@ elif page == "Quiz":
                     )
 
                     st.write(
-                        f"Your answer: **{user_answer}. {user_text}**"
+                        f"Your answer: "
+                        f"**{user_answer}. {user_text}**"
                     )
 
+
+                # Wrong answer
                 else:
 
                     st.error(
@@ -153,25 +393,41 @@ elif page == "Quiz":
                     )
 
                     st.write(
-                        f"Your answer: **{user_answer}. {user_text}**"
+                        f"Your answer: "
+                        f"**{user_answer}. {user_text}**"
                     )
 
                     st.write(
-                        f"Correct answer: **{correct_answer}. {correct_text}**"
+                        f"Correct answer: "
+                        f"**{correct_answer}. "
+                        f"{correct_text}**"
                     )
 
                 st.divider()
 
-            # Best score
-            initialize_progress(language)
 
-            best_score = progress[language]["quiz_score"]
+            # --------------------------------------------------
+            # BEST SCORE
+            # --------------------------------------------------
 
-            st.write(
-                f"🏅 **Best Score:** {best_score}/{len(questions)}"
+            initialize_progress(
+                language
             )
 
-            # Try again
+            best_score = progress[language][
+                "quiz_score"
+            ]
+
+            st.write(
+                f"🏅 **Best Score:** "
+                f"{best_score}/{len(questions)}"
+            )
+
+
+            # --------------------------------------------------
+            # TRY AGAIN
+            # --------------------------------------------------
+
             if st.button(
                 "🔄 Try Again",
                 key=f"retry_{language}"
@@ -180,3 +436,126 @@ elif page == "Quiz":
                 del st.session_state[result_key]
 
                 st.rerun()
+
+
+# ==================================================
+# PROGRESS PAGE
+# ==================================================
+
+elif page == "Progress":
+
+    st.header("📊 Your Progress")
+
+    # Select language
+    language = st.selectbox(
+        "Select a language:",
+        list(languages.keys()),
+        key="progress_language"
+    )
+
+    # Initialize progress
+    initialize_progress(language)
+
+    data = progress[language]
+
+    st.divider()
+
+    st.subheader(
+        f"📚 {language} Progress"
+    )
+
+
+    # --------------------------------------------------
+    # TOPIC PROGRESS
+    # --------------------------------------------------
+
+    topics = [
+        "greetings",
+        "common_words",
+        "daily_phrases",
+        "numbers"
+    ]
+
+    completed = 0
+
+    for topic in topics:
+
+        if data[topic]:
+
+            st.success(
+                f"✅ {topic.replace('_', ' ').title()} — Completed"
+            )
+
+            completed += 1
+
+        else:
+
+            st.warning(
+                f"⬜ {topic.replace('_', ' ').title()} — Not Completed"
+            )
+
+
+    # --------------------------------------------------
+    # PROGRESS BAR
+    # --------------------------------------------------
+
+    topic_percentage = (
+        completed / len(topics)
+    ) * 100
+
+    st.divider()
+
+    st.subheader("📈 Learning Progress")
+
+    st.progress(
+        topic_percentage / 100
+    )
+
+    st.write(
+        f"**{completed}/{len(topics)} topics completed**"
+    )
+
+    st.write(
+        f"Progress: **{topic_percentage:.0f}%**"
+    )
+
+
+    # --------------------------------------------------
+    # QUIZ SCORE
+    # --------------------------------------------------
+
+    st.divider()
+
+    st.subheader("🧠 Quiz Performance")
+
+    best_score = data["quiz_score"]
+
+    st.metric(
+        "🏅 Best Quiz Score",
+        f"{best_score}/10"
+    )
+
+
+    if best_score == 10:
+
+        st.success(
+            "🎉 Amazing! You achieved a perfect quiz score!"
+        )
+
+    elif best_score >= 8:
+
+        st.info(
+            "🔥 Excellent quiz performance!"
+        )
+
+    elif best_score >= 5:
+
+        st.info(
+            "👍 Good progress. Keep practicing!"
+        )
+
+    else:
+
+        st.warning(
+            "💪 Complete some quizzes to improve your score!"
+        )
