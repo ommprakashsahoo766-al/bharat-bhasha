@@ -1,355 +1,385 @@
-
-# Bharat Bhasha
-# Language Learning Data
-
 languages = {
 
     "English": {
+
         "greetings": {
             "Hello": "Hello",
             "Good Morning": "Good Morning",
-            "How are you?": "How are you?",
-            "Thank you": "Thank you"
+            "Good Evening": "Good Evening",
+            "Thank You": "Thank You"
         },
+
         "common_words": {
-            "Yes": "Yes",
-            "No": "No",
-            "Water": "Water",
-            "Food": "Food",
-            "Friend": "Friend"
+            "Paani": "Water",
+            "Khana": "Food",
+            "Dost": "Friend",
+            "Ghar": "House"
         },
+
         "daily_phrases": {
-            "What is your name?": "What is your name?",
-            "Where are you going?": "Where are you going?",
+            "How are you?": "How are you?",
             "I am fine": "I am fine",
-            "See you tomorrow": "See you tomorrow"
+            "What is your name?": "What is your name?"
         },
+
         "numbers": {
-            "1": "One",
-            "2": "Two",
-            "3": "Three",
-            "4": "Four",
-            "5": "Five"
+            "One": "1",
+            "Two": "2",
+            "Three": "3",
+            "Four": "4",
+            "Five": "5"
         }
     },
+
 
     "Hindi": {
+
         "greetings": {
-            "Hello": "Namaste",
-            "Good Morning": "Suprabhat",
-            "How are you?": "Aap kaise hain?",
-            "Thank you": "Dhanyavaad"
+            "Namaste": "Hello",
+            "Suprabhat": "Good Morning",
+            "Shubh Sandhya": "Good Evening",
+            "Dhanyavaad": "Thank You"
         },
+
         "common_words": {
-            "Yes": "Haan",
-            "No": "Nahi",
-            "Water": "Paani",
-            "Food": "Khaana",
-            "Friend": "Dost"
+            "Paani": "Water",
+            "Khana": "Food",
+            "Dost": "Friend",
+            "Ghar": "House"
         },
+
         "daily_phrases": {
-            "What is your name?": "Aapka naam kya hai?",
-            "Where are you going?": "Aap kahan ja rahe hain?",
-            "I am fine": "Main theek hoon",
-            "See you tomorrow": "Kal milte hain"
+            "Aap kaise hain?": "How are you?",
+            "Main theek hoon": "I am fine",
+            "Aapka naam kya hai?": "What is your name?"
         },
+
         "numbers": {
-            "1": "Ek",
-            "2": "Do",
-            "3": "Teen",
-            "4": "Chaar",
-            "5": "Paanch"
+            "Ek": "1",
+            "Do": "2",
+            "Teen": "3",
+            "Chaar": "4",
+            "Paanch": "5"
         }
     },
+
 
     "Odia": {
+
         "greetings": {
-            "Hello": "Namaskar",
-            "Good Morning": "Suprabhat",
-            "How are you?": "Apana kemiti achhanti?",
-            "Thank you": "Dhanyabad"
+            "Namaskar": "Hello",
+            "Suprabhat": "Good Morning",
+            "Shubha Sandhya": "Good Evening",
+            "Dhanyabad": "Thank You"
         },
+
         "common_words": {
-            "Yes": "Haan",
-            "No": "Naahin",
-            "Water": "Paani",
-            "Food": "Khaiba",
-            "Friend": "Sanga"
+            "Paani": "Water",
+            "Khaiba": "Food",
+            "Sanga": "Friend",
+            "Ghara": "House"
         },
+
         "daily_phrases": {
-            "What is your name?": "Apananka naa kana?",
-            "Where are you going?": "Apana kuade jauchhanti?",
-            "I am fine": "Mu bhala achhi",
-            "See you tomorrow": "Kali dekha heba"
+            "Tume kemiti acha?": "How are you?",
+            "Mu bhala achhi": "I am fine",
+            "Tumara naa kana?": "What is your name?"
         },
+
         "numbers": {
-            "1": "Eka",
-            "2": "Dui",
-            "3": "Tini",
-            "4": "Chari",
-            "5": "Paancha"
+            "Eka": "1",
+            "Dui": "2",
+            "Tini": "3",
+            "Chari": "4",
+            "Paancha": "5"
         }
     },
+
 
     "Bengali": {
+
         "greetings": {
-            "Hello": "Nomoshkar",
-            "Good Morning": "Suprabhat",
-            "How are you?": "Apni kemon achhen?",
-            "Thank you": "Dhonnobad"
+            "Nomoshkar": "Hello",
+            "Shuprabhat": "Good Morning",
+            "Shubho Shondha": "Good Evening",
+            "Dhonnobad": "Thank You"
         },
+
         "common_words": {
-            "Yes": "Haan",
-            "No": "Na",
-            "Water": "Jol",
-            "Food": "Khabar",
-            "Friend": "Bondhu"
+            "Jol": "Water",
+            "Khabar": "Food",
+            "Bondhu": "Friend",
+            "Bari": "House"
         },
+
         "daily_phrases": {
-            "What is your name?": "Apnar naam ki?",
-            "Where are you going?": "Apni kothay jacchen?",
-            "I am fine": "Ami bhalo achhi",
-            "See you tomorrow": "Kal dekha hobe"
+            "Kemon acho?": "How are you?",
+            "Ami bhalo achi": "I am fine",
+            "Tomar naam ki?": "What is your name?"
         },
+
         "numbers": {
-            "1": "Ek",
-            "2": "Dui",
-            "3": "Tin",
-            "4": "Char",
-            "5": "Panch"
+            "Ek": "1",
+            "Dui": "2",
+            "Tin": "3",
+            "Char": "4",
+            "Panch": "5"
         }
     },
+
 
     "Punjabi": {
+
         "greetings": {
-            "Hello": "Sat Sri Akaal",
-            "Good Morning": "Shubh Savera",
-            "How are you?": "Tusi kiven ho?",
-            "Thank you": "Dhanvaad"
+            "Sat Sri Akaal": "Hello",
+            "Shubh Savera": "Good Morning",
+            "Shubh Sandhya": "Good Evening",
+            "Dhanvaad": "Thank You"
         },
+
         "common_words": {
-            "Yes": "Haanji",
-            "No": "Nahi",
-            "Water": "Paani",
-            "Food": "Khaana",
-            "Friend": "Dost"
+            "Paani": "Water",
+            "Khana": "Food",
+            "Dost": "Friend",
+            "Ghar": "House"
         },
+
         "daily_phrases": {
-            "What is your name?": "Tuhada naam ki hai?",
-            "Where are you going?": "Tusi kithe ja rahe ho?",
-            "I am fine": "Main theek haan",
-            "See you tomorrow": "Kal milange"
+            "Tusi kiven ho?": "How are you?",
+            "Main theek haan": "I am fine",
+            "Tuhada naam ki hai?": "What is your name?"
         },
+
         "numbers": {
-            "1": "Ik",
-            "2": "Do",
-            "3": "Tin",
-            "4": "Chaar",
-            "5": "Panj"
+            "Ik": "1",
+            "Do": "2",
+            "Tin": "3",
+            "Chaar": "4",
+            "Panj": "5"
         }
     },
+
 
     "Telugu": {
+
         "greetings": {
-            "Hello": "Namaskaram",
-            "Good Morning": "Subhodayam",
-            "How are you?": "Meeru ela unnaru?",
-            "Thank you": "Dhanyavadalu"
+            "Namaskaram": "Hello",
+            "Shubhodayam": "Good Morning",
+            "Shubha Sayam": "Good Evening",
+            "Dhanyavadalu": "Thank You"
         },
+
         "common_words": {
-            "Yes": "Avunu",
-            "No": "Kaadu",
-            "Water": "Neeru",
-            "Food": "Aaharam",
-            "Friend": "Snehitudu"
+            "Neeru": "Water",
+            "Aaharam": "Food",
+            "Snehitudu": "Friend",
+            "Illu": "House"
         },
+
         "daily_phrases": {
-            "What is your name?": "Mee peru emiti?",
-            "Where are you going?": "Meeru ekkadiki veltunnaru?",
-            "I am fine": "Nenu baagunnanu",
-            "See you tomorrow": "Repu kaluddam"
+            "Meeru ela unnaru?": "How are you?",
+            "Nenu baagunnanu": "I am fine",
+            "Mee peru emiti?": "What is your name?"
         },
+
         "numbers": {
-            "1": "Okkati",
-            "2": "Rendu",
-            "3": "Moodu",
-            "4": "Naalugu",
-            "5": "Aidu"
+            "Oka": "1",
+            "Rendu": "2",
+            "Moodu": "3",
+            "Naalugu": "4",
+            "Aidu": "5"
         }
     },
+
 
     "Tamil": {
+
         "greetings": {
-            "Hello": "Vanakkam",
-            "Good Morning": "Kaalai Vanakkam",
-            "How are you?": "Eppadi irukkireergal?",
-            "Thank you": "Nandri"
+            "Vanakkam": "Hello",
+            "Kaalai Vanakkam": "Good Morning",
+            "Maalai Vanakkam": "Good Evening",
+            "Nandri": "Thank You"
         },
+
         "common_words": {
-            "Yes": "Aamam",
-            "No": "Illai",
-            "Water": "Thanneer",
-            "Food": "Saapadu",
-            "Friend": "Nanban"
+            "Thanneer": "Water",
+            "Saapadu": "Food",
+            "Nanban": "Friend",
+            "Veedu": "House"
         },
+
         "daily_phrases": {
-            "What is your name?": "Ungal peyar enna?",
-            "Where are you going?": "Neengal enge pogireergal?",
-            "I am fine": "Naan nalamaga irukkiren",
-            "See you tomorrow": "Naalai sandhippom"
+            "Eppadi irukkeenga?": "How are you?",
+            "Naan nandraaga irukkiren": "I am fine",
+            "Ungal peyar enna?": "What is your name?"
         },
+
         "numbers": {
-            "1": "Ondru",
-            "2": "Irandu",
-            "3": "Moondru",
-            "4": "Naangu",
-            "5": "Aindhu"
+            "Ondru": "1",
+            "Rendu": "2",
+            "Moondru": "3",
+            "Naangu": "4",
+            "Aindhu": "5"
         }
     },
+
 
     "Marathi": {
+
         "greetings": {
-            "Hello": "Namaskar",
-            "Good Morning": "Suprabhat",
-            "How are you?": "Tumhi kase aahat?",
-            "Thank you": "Dhanyavaad"
+            "Namaskar": "Hello",
+            "Suprabhat": "Good Morning",
+            "Shubh Sandhya": "Good Evening",
+            "Dhanyavaad": "Thank You"
         },
+
         "common_words": {
-            "Yes": "Ho",
-            "No": "Nahi",
-            "Water": "Paani",
-            "Food": "Jevan",
-            "Friend": "Mitra"
+            "Paani": "Water",
+            "Jevan": "Food",
+            "Mitra": "Friend",
+            "Ghar": "House"
         },
+
         "daily_phrases": {
-            "What is your name?": "Tumche naav kaay aahe?",
-            "Where are you going?": "Tumhi kuthe jaat aahat?",
-            "I am fine": "Mi theek aahe",
-            "See you tomorrow": "Udya bhetu"
+            "Tumhi kase aahat?": "How are you?",
+            "Mi thik aahe": "I am fine",
+            "Tumche naav kaay aahe?": "What is your name?"
         },
+
         "numbers": {
-            "1": "Ek",
-            "2": "Don",
-            "3": "Teen",
-            "4": "Chaar",
-            "5": "Pach"
+            "Ek": "1",
+            "Don": "2",
+            "Teen": "3",
+            "Chaar": "4",
+            "Pach": "5"
         }
     },
+
 
     "Gujarati": {
+
         "greetings": {
-            "Hello": "Namaste",
-            "Good Morning": "Suprabhat",
-            "How are you?": "Tame kem cho?",
-            "Thank you": "Aabhar"
+            "Namaste": "Hello",
+            "Suprabhat": "Good Morning",
+            "Shubh Sandhya": "Good Evening",
+            "Aabhar": "Thank You"
         },
+
         "common_words": {
-            "Yes": "Haa",
-            "No": "Naa",
-            "Water": "Paani",
-            "Food": "Khaanu",
-            "Friend": "Mitra"
+            "Paani": "Water",
+            "Khaavanu": "Food",
+            "Mitra": "Friend",
+            "Ghar": "House"
         },
+
         "daily_phrases": {
-            "What is your name?": "Tamaru naam shu chhe?",
-            "Where are you going?": "Tame kya jai rahya cho?",
-            "I am fine": "Hu majama chhu",
-            "See you tomorrow": "Aavti kale malishu"
+            "Tame kem cho?": "How are you?",
+            "Hu majama chu": "I am fine",
+            "Tamaaru naam shu che?": "What is your name?"
         },
+
         "numbers": {
-            "1": "Ek",
-            "2": "Be",
-            "3": "Tran",
-            "4": "Chaar",
-            "5": "Paanch"
+            "Ek": "1",
+            "Be": "2",
+            "Tran": "3",
+            "Chaar": "4",
+            "Paanch": "5"
         }
     },
+
 
     "Assamese": {
+
         "greetings": {
-            "Hello": "Nomoskar",
-            "Good Morning": "Xubho Prabhat",
-            "How are you?": "Apuni kene aase?",
-            "Thank you": "Dhonyobad"
+            "Nomoskar": "Hello",
+            "Xuprabhat": "Good Morning",
+            "Xubho Xondhiya": "Good Evening",
+            "Dhonyobad": "Thank You"
         },
+
         "common_words": {
-            "Yes": "Hoi",
-            "No": "Nai",
-            "Water": "Pani",
-            "Food": "Bhojon",
-            "Friend": "Bondhu"
+            "Pani": "Water",
+            "Aahar": "Food",
+            "Bondhu": "Friend",
+            "Ghor": "House"
         },
+
         "daily_phrases": {
-            "What is your name?": "Apunar naam ki?",
-            "Where are you going?": "Apuni kot jai ase?",
-            "I am fine": "Moi bhal aasu",
-            "See you tomorrow": "Kailoi dekha hobo"
+            "Apuni kene aase?": "How are you?",
+            "Moi bhal aasu": "I am fine",
+            "Apunar naam ki?": "What is your name?"
         },
+
         "numbers": {
-            "1": "Ek",
-            "2": "Dui",
-            "3": "Tin",
-            "4": "Sari",
-            "5": "Pas"
+            "Ek": "1",
+            "Dui": "2",
+            "Tin": "3",
+            "Sari": "4",
+            "Panch": "5"
         }
     },
+
 
     "Bhojpuri": {
+
         "greetings": {
-            "Hello": "Pranam",
-            "Good Morning": "Ram Ram",
-            "How are you?": "Ka haal ba?",
-            "Thank you": "Dhanyavaad"
+            "Pranam": "Hello",
+            "Subah Ke Pranam": "Good Morning",
+            "Ram Ram": "Good Evening",
+            "Dhanyavaad": "Thank You"
         },
+
         "common_words": {
-            "Yes": "Haan",
-            "No": "Na",
-            "Water": "Paani",
-            "Food": "Khaana",
-            "Friend": "Dost"
+            "Paani": "Water",
+            "Khana": "Food",
+            "Dost": "Friend",
+            "Ghar": "House"
         },
+
         "daily_phrases": {
-            "What is your name?": "Tohar naam ka ba?",
-            "Where are you going?": "Tu kahaan jaat baadu?",
-            "I am fine": "Hum theek bani",
-            "See you tomorrow": "Kaal milab"
+            "Ka haal ba?": "How are you?",
+            "Hum theek bani": "I am fine",
+            "Tohar naam ka ba?": "What is your name?"
         },
+
         "numbers": {
-            "1": "Ek",
-            "2": "Dui",
-            "3": "Teen",
-            "4": "Chaar",
-            "5": "Paanch"
+            "Ek": "1",
+            "Dui": "2",
+            "Teen": "3",
+            "Chaar": "4",
+            "Paanch": "5"
         }
     },
 
+
     "Haryanvi": {
+
         "greetings": {
-            "Hello": "Ram Ram",
-            "Good Morning": "Ram Ram",
-            "How are you?": "Ke haal se?",
-            "Thank you": "Dhanyavaad"
+            "Ram Ram": "Hello",
+            "Ram Ram Subah": "Good Morning",
+            "Ram Ram Shaam": "Good Evening",
+            "Dhanyavaad": "Thank You"
         },
+
         "common_words": {
-            "Yes": "Haan",
-            "No": "Na",
-            "Water": "Paani",
-            "Food": "Khaana",
-            "Friend": "Yaar"
+            "Paani": "Water",
+            "Khana": "Food",
+            "Yaar": "Friend",
+            "Ghar": "House"
         },
+
         "daily_phrases": {
-            "What is your name?": "Tera naam ke se?",
-            "Where are you going?": "Tu kade jaa rya se?",
-            "I am fine": "Main theek su",
-            "See you tomorrow": "Kal milange"
+            "Ke haal se?": "How are you?",
+            "Main theek su": "I am fine",
+            "Tera naam ke se?": "What is your name?"
         },
+
         "numbers": {
-            "1": "Ek",
-            "2": "Do",
-            "3": "Teen",
-            "4": "Chaar",
-            "5": "Paanch"
+            "Ek": "1",
+            "Do": "2",
+            "Teen": "3",
+            "Chaar": "4",
+            "Paanch": "5"
         }
     }
 }
-
