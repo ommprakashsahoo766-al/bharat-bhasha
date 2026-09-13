@@ -1,7 +1,7 @@
 # Bharat Bhasha
 # Indian Language Learning Project
 
-from languages import languages
+from languages import language
 from quiz import quiz_questions, start_quiz
 from progress import mark_topic_completed, save_quiz_score, show_progress
 
