@@ -1,7 +1,9 @@
 # Bharat Bhasha
-# Language Practice Quiz
+# 120 Question Language Practice Quiz
 
 quiz_questions = {
+
+    # ==================== ENGLISH ====================
 
     "English": [
         {"question": "What is the English word for 'Paani'?",
@@ -13,8 +15,8 @@ quiz_questions = {
          "answer": "A"},
 
         {"question": "What is the English word for 'Ghar'?",
-         "options": {"A": "House", "B": "School", "C": "Food", "D": "Friend"},
-         "answer": "A"},
+         "options": {"A": "School", "B": "House", "C": "Food", "D": "Friend"},
+         "answer": "B"},
 
         {"question": "What is the English word for 'Khana'?",
          "options": {"A": "Water", "B": "Food", "C": "House", "D": "Morning"},
@@ -46,8 +48,10 @@ quiz_questions = {
     ],
 
 
+    # ==================== HINDI ====================
+
     "Hindi": [
-        {"question": "What does 'Paani' mean?",
+        {"question": "What does 'Paani' mean in English?",
          "options": {"A": "Food", "B": "Friend", "C": "Water", "D": "House"},
          "answer": "C"},
 
@@ -89,6 +93,8 @@ quiz_questions = {
     ],
 
 
+    # ==================== ODIA ====================
+
     "Odia": [
         {"question": "What does 'Paani' mean?",
          "options": {"A": "Water", "B": "Food", "C": "Friend", "D": "Morning"},
@@ -123,7 +129,7 @@ quiz_questions = {
          "answer": "B"},
 
         {"question": "What does 'Ama' mean?",
-         "options": {"A": "My/Our", "B": "Water", "C": "House", "D": "Friend"},
+         "options": {"A": "Our/Our own", "B": "Water", "C": "House", "D": "Friend"},
          "answer": "A"},
 
         {"question": "What does 'Bhai' mean?",
@@ -131,6 +137,8 @@ quiz_questions = {
          "answer": "B"}
     ],
 
+
+    # ==================== BENGALI ====================
 
     "Bengali": [
         {"question": "What does 'Jol' mean?",
@@ -175,6 +183,8 @@ quiz_questions = {
     ],
 
 
+    # ==================== PUNJABI ====================
+
     "Punjabi": [
         {"question": "How do you say 'Hello' in Punjabi?",
          "options": {"A": "Namaste", "B": "Sat Sri Akaal", "C": "Dhanvaad", "D": "Paani"},
@@ -217,6 +227,8 @@ quiz_questions = {
          "answer": "A"}
     ],
 
+
+    # ==================== TELUGU ====================
 
     "Telugu": [
         {"question": "How do you say 'Hello' in Telugu?",
@@ -261,6 +273,8 @@ quiz_questions = {
     ],
 
 
+    # ==================== TAMIL ====================
+
     "Tamil": [
         {"question": "How do you say 'Hello' in Tamil?",
          "options": {"A": "Vanakkam", "B": "Nandri", "C": "Thanneer", "D": "Nanban"},
@@ -303,6 +317,8 @@ quiz_questions = {
          "answer": "B"}
     ],
 
+
+    # ==================== MARATHI ====================
 
     "Marathi": [
         {"question": "How do you say 'Hello' in Marathi?",
@@ -347,6 +363,8 @@ quiz_questions = {
     ],
 
 
+    # ==================== GUJARATI ====================
+
     "Gujarati": [
         {"question": "How do you say 'Thank you' in Gujarati?",
          "options": {"A": "Namaste", "B": "Aabhar", "C": "Paani", "D": "Mitra"},
@@ -389,6 +407,8 @@ quiz_questions = {
          "answer": "A"}
     ],
 
+
+    # ==================== ASSAMESE ====================
 
     "Assamese": [
         {"question": "How do you say 'Hello' in Assamese?",
@@ -433,6 +453,8 @@ quiz_questions = {
     ],
 
 
+    # ==================== BHOJPURI ====================
+
     "Bhojpuri": [
         {"question": "How do you say 'Hello' in Bhojpuri?",
          "options": {"A": "Pranam", "B": "Dhanyavaad", "C": "Paani", "D": "Dost"},
@@ -475,6 +497,8 @@ quiz_questions = {
          "answer": "A"}
     ],
 
+
+    # ==================== HARYANVI ====================
 
     "Haryanvi": [
         {"question": "How do you say 'Hello' in Haryanvi?",
@@ -520,7 +544,8 @@ quiz_questions = {
 }
 
 
-# Console quiz function
+# ==================== CONSOLE QUIZ ====================
+
 def start_quiz(language, questions):
 
     print("\n" + "=" * 50)
