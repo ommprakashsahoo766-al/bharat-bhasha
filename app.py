@@ -1,20 +1,13 @@
-# Bharat Bhasha
-# Indian Language Learning Project - Streamlit App
-
 import streamlit as st
 
 from languages import languages
 from quiz import quiz_questions
 from progress import (
+    progress,
     initialize_progress,
     mark_topic_completed,
-    save_quiz_score,
+    save_quiz_score
 )
-
-
-# -------------------------------------------------
-# PAGE SETTINGS
-# -------------------------------------------------
 
 st.set_page_config(
     page_title="Bharat Bhasha",
@@ -22,114 +15,77 @@ st.set_page_config(
     layout="wide"
 )
 
-
-# -------------------------------------------------
-# TITLE
-# -------------------------------------------------
-
 st.title("🇮🇳 Bharat Bhasha")
-st.subheader("Indian Language Learning Platform")
+st.subheader("Learn Indian Languages Easily")
 
-st.write(
-    "Learn Indian languages through vocabulary, phrases, "
-    "numbers and interactive quizzes."
-)
-
-st.divider()
-
-
-# -------------------------------------------------
-# LANGUAGE SELECTION
-# -------------------------------------------------
-
-language_list = list(languages.keys())
-
-language = st.selectbox(
-    "🌐 Choose a Language",
-    language_list
-)
-
-# Initialize progress
-initialize_progress(language)
-
-
-# -------------------------------------------------
-# SIDEBAR
-# -------------------------------------------------
-
-st.sidebar.title("📚 Bharat Bhasha")
+st.sidebar.title("📚 Menu")
 
 page = st.sidebar.radio(
-    "Choose Section",
-    [
-        "🏠 Home",
-        "📖 Learn",
-        "📝 Quiz",
-        "📊 Progress"
-    ]
+    "Choose an option:",
+    ["Home", "Learn", "Quiz", "Progress"]
 )
 
+# ---------------- HOME ----------------
 
-# =================================================
-# HOME
-# =================================================
+if page == "Home":
 
-if page == "🏠 Home":
-
-    st.header("Welcome to Bharat Bhasha 🇮🇳")
+    st.header("Welcome to Bharat Bhasha! 🇮🇳")
 
     st.write(
-        "Bharat Bhasha is a simple language-learning project "
-        "designed to help you practice different Indian languages."
+        "Bharat Bhasha is a simple language-learning platform "
+        "to help you learn different Indian languages."
     )
 
-    col1, col2, col3 = st.columns(3)
-
-    with col1:
-        st.metric("Languages", len(languages))
-
-    with col2:
-        st.metric("Topics", 4)
-
-    with col3:
-        st.metric("Quiz Questions", "2 / Language")
+    st.success("Choose a section from the sidebar to start learning.")
 
     st.info(
-        f"You have selected **{language}**. "
-        "Go to the Learn section to start learning!"
+        "Available languages: English, Hindi, Odia, Bengali, Punjabi, "
+        "Telugu, Tamil, Marathi, Gujarati, Assamese, Bhojpuri and Haryanvi."
     )
 
 
-# =================================================
-# LEARN
-# =================================================
+# ---------------- LEARN ----------------
 
-elif page == "📖 Learn":
+elif page == "Learn":
 
-    st.header(f"📖 Learn {language}")
+    st.header("📖 Learn a Language")
 
-    topics = list(languages[language].keys())
+    language = st.selectbox(
+        "Select a language:",
+        list(languages.keys())
+    )
+
+    topics = languages[language]
+
+    topic_names = list(topics.keys())
 
     topic = st.selectbox(
-        "Choose a Topic",
-        topics
+        "Select a topic:",
+        topic_names
     )
+
+    st.divider()
 
     st.subheader(topic.replace("_", " ").title())
 
-    data = languages[language][topic]
+    topic_data = topics[topic]
 
-    for english, translation in data.items():
+    if isinstance(topic_data, dict):
 
-        col1, col2 = st.columns(2)
+        for word, meaning in topic_data.items():
 
-        with col1:
-            st.write(f"**English:** {english}")
+            st.write(f"### {word}")
 
-        with col2:
-            st.write(f"**{language}:** {translation}")
+            st.write(f"Meaning: **{meaning}**")
 
-        st.divider()
+    elif isinstance(topic_data, list):
+
+        for item in topic_data:
+            st.write(f"• {item}")
+
+    else:
+
+        st.write(topic_data)
 
     if st.button("✅ Mark Topic as Completed"):
 
@@ -140,117 +96,104 @@ elif page == "📖 Learn":
         )
 
 
-# =================================================
-# QUIZ
-# =================================================
+# ---------------- QUIZ ----------------
 
-elif page == "📝 Quiz":
+elif page == "Quiz":
 
-    st.header(f"📝 {language} Practice Quiz")
+    st.header("🧠 Practice Quiz")
 
-    questions = quiz_questions.get(language, [])
+    language = st.selectbox(
+        "Select a language:",
+        list(quiz_questions.keys())
+    )
 
-    if not questions:
+    questions = quiz_questions[language]
 
-        st.warning("No quiz questions available for this language.")
+    st.write(f"### {language} Quiz")
 
-    else:
+    with st.form("quiz_form"):
 
-        st.write(
-            f"Test your knowledge of **{language}**."
-        )
+        answers = []
 
-        # Create form so answers are submitted together
-        with st.form("quiz_form"):
-
-            answers = []
-
-            for number, question in enumerate(questions, 1):
-
-                st.subheader(f"Question {number}")
-
-                st.write(question["question"])
-
-                options = list(question["options"].keys())
-
-                answer = st.radio(
-                    "Choose your answer:",
-                    options,
-                    format_func=lambda x:
-                        f"{x}. {question['options'][x]}",
-                    key=f"question_{number}"
-                )
-
-                answers.append(answer)
-
-                st.divider()
-
-            submitted = st.form_submit_button(
-                "🚀 Submit Quiz"
-            )
-
-        if submitted:
-
-            score = 0
-
-            for i, question in enumerate(questions):
-
-                if answers[i] == question["answer"]:
-                    score += 1
-
-            percentage = (score / len(questions)) * 100
-
-            # Save best score
-            save_quiz_score(language, score)
-
-            st.success(
-                f"Quiz completed! Your score is "
-                f"**{score}/{len(questions)}**"
-            )
-
-            st.progress(
-                percentage / 100
-            )
+        for i, question in enumerate(questions):
 
             st.write(
-                f"### Score: {percentage:.0f}%"
+                f"**Question {i + 1}: {question['question']}**"
             )
 
-            if percentage == 100:
+            options = question["options"]
 
-                st.balloons()
+            selected = st.radio(
+                "Choose your answer:",
+                list(options.keys()),
+                format_func=lambda x: f"{x}. {options[x]}",
+                key=f"question_{i}"
+            )
 
-                st.success(
-                    "🎉 Excellent! You have mastered this quiz."
-                )
+            answers.append(selected)
 
-            elif percentage >= 60:
+            st.divider()
 
-                st.info(
-                    "👍 Good job! Keep practicing."
-                )
+        submitted = st.form_submit_button(
+            "Submit Quiz"
+        )
 
-            else:
+    if submitted:
 
-                st.warning(
-                    "📚 Keep learning and try the quiz again."
-                )
+        score = 0
+
+        for i, question in enumerate(questions):
+
+            if answers[i] == question["answer"]:
+                score += 1
+
+        save_quiz_score(language, score)
+
+        percentage = (score / len(questions)) * 100
+
+        st.success(
+            f"Your Score: {score}/{len(questions)}"
+        )
+
+        st.progress(percentage / 100)
+
+        st.write(
+            f"Percentage: **{percentage:.0f}%**"
+        )
+
+        if percentage == 100:
+            st.balloons()
+            st.success(
+                "Excellent! You have mastered this quiz! 🎉"
+            )
+
+        elif percentage >= 60:
+            st.info(
+                "Good job! Keep practicing. 👍"
+            )
+
+        else:
+            st.warning(
+                "Keep learning and try again. 💪"
+            )
 
 
-# =================================================
-# PROGRESS
-# =================================================
+# ---------------- PROGRESS ----------------
 
-elif page == "📊 Progress":
+elif page == "Progress":
 
-    st.header(f"📊 {language} Progress")
+    st.header("📊 Learning Progress")
 
-    data = initialize_progress(language)
+    language = st.selectbox(
+        "Select a language:",
+        list(languages.keys())
+    )
 
-    # Get the progress dictionary
-    from progress import progress
+    initialize_progress(language)
 
     data = progress[language]
+
+    completed = 0
 
     topics = [
         "greetings",
@@ -259,53 +202,31 @@ elif page == "📊 Progress":
         "numbers"
     ]
 
-    completed = 0
-
     for topic in topics:
 
         if data[topic]:
-
+            completed += 1
             st.success(
                 f"✅ {topic.replace('_', ' ').title()} - Completed"
             )
 
-            completed += 1
-
         else:
-
             st.warning(
-                f"⭕ {topic.replace('_', ' ').title()} - Not completed"
+                f"⬜ {topic.replace('_', ' ').title()} - Not Completed"
             )
 
     percentage = (completed / len(topics)) * 100
 
     st.divider()
 
-    st.subheader("Learning Progress")
+    st.subheader("Overall Progress")
 
-    st.progress(
-        percentage / 100
+    st.progress(percentage / 100)
+
+    st.write(
+        f"### {percentage:.0f}% Completed"
     )
 
     st.write(
-        f"**{percentage:.0f}% completed**"
+        f"🏆 Best Quiz Score: **{data['quiz_score']}**"
     )
-
-    st.divider()
-
-    st.subheader("🏆 Best Quiz Score")
-
-    st.write(
-        f"**{data['quiz_score']} / 2**"
-    )
-
-
-# -------------------------------------------------
-# FOOTER
-# -------------------------------------------------
-
-st.divider()
-
-st.caption(
-    "🇮🇳 Bharat Bhasha | Indian Language Learning Project"
-)
