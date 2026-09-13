@@ -1,4 +1,4 @@
-```python
+
 # Bharat Bhasha
 # Language Learning Data
 
@@ -352,4 +352,4 @@ languages = {
         }
     }
 }
-```
+
