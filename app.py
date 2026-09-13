@@ -1,5 +1,10 @@
 import streamlit as st
 
+
+# ============================================================
+# IMPORTS
+# ============================================================
+
 from languages import languages
 from quiz import quiz_questions
 
@@ -46,7 +51,9 @@ def save_quiz_score(language, score):
     current_best = st.session_state.progress[language]["quiz_score"]
 
     if score > current_best:
+
         st.session_state.progress[language]["quiz_score"] = score
+
         return True
 
     return False
@@ -62,18 +69,18 @@ initialize_progress()
 st.markdown("""
 <style>
 
-/* =========================
+/* ==========================================================
    MAIN PAGE
-   ========================= */
+   ========================================================== */
 
 .stApp {
     background-color: #f5f7fb;
 }
 
 
-/* =========================
+/* ==========================================================
    SIDEBAR
-   ========================= */
+   ========================================================== */
 
 section[data-testid="stSidebar"] {
     background-color: #ffffff !important;
@@ -92,9 +99,13 @@ section[data-testid="stSidebar"] label {
 }
 
 
-/* Sidebar radio buttons */
+/* Sidebar radio */
 
 section[data-testid="stSidebar"] div[data-testid="stRadio"] label {
+    color: #222222 !important;
+}
+
+section[data-testid="stSidebar"] div[data-testid="stRadio"] label p {
     color: #222222 !important;
 }
 
@@ -105,30 +116,35 @@ section[data-testid="stSidebar"] div[data-testid="stSelectbox"] label {
     color: #222222 !important;
 }
 
-section[data-testid="stSidebar"] div[data-testid="stSelectbox"] div {
+section[data-testid="stSidebar"] div[data-baseweb="select"] {
+    background-color: #ffffff !important;
+}
+
+section[data-testid="stSidebar"] div[data-baseweb="select"] > div {
+    background-color: #ffffff !important;
     color: #222222 !important;
 }
 
 
-/* =========================
-   NORMAL TEXT
-   ========================= */
+/* ==========================================================
+   GENERAL TEXT
+   ========================================================== */
+
+.stApp h1,
+.stApp h2,
+.stApp h3,
+.stApp h4 {
+    color: #222222 !important;
+}
 
 .stMarkdown p {
-    color: #222222;
-}
-
-.stMarkdown h1,
-.stMarkdown h2,
-.stMarkdown h3,
-.stMarkdown h4 {
-    color: #222222;
+    color: #222222 !important;
 }
 
 
-/* =========================
+/* ==========================================================
    HERO
-   ========================= */
+   ========================================================== */
 
 .hero {
     background: linear-gradient(
@@ -150,19 +166,19 @@ section[data-testid="stSidebar"] div[data-testid="stSelectbox"] div {
 .hero-title {
     font-size: 48px;
     font-weight: 800;
-    color: #111111;
+    color: #111111 !important;
     margin-bottom: 15px;
 }
 
 .hero-subtitle {
     font-size: 20px;
-    color: #222222;
+    color: #222222 !important;
 }
 
 
-/* =========================
-   CARDS
-   ========================= */
+/* ==========================================================
+   HOME CARDS
+   ========================================================== */
 
 .card {
     background-color: #ffffff;
@@ -173,24 +189,26 @@ section[data-testid="stSidebar"] div[data-testid="stSelectbox"] div {
 
     margin-bottom: 20px;
 
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
 }
 
 .card-title {
     font-size: 25px;
     font-weight: 700;
-    color: #222222;
+    color: #222222 !important;
+
+    margin-bottom: 10px;
 }
 
 .card-text {
     font-size: 16px;
-    color: #333333;
+    color: #333333 !important;
 }
 
 
-/* =========================
+/* ==========================================================
    TOPIC CARDS
-   ========================= */
+   ========================================================== */
 
 .topic-card {
     background-color: #ffffff;
@@ -202,24 +220,24 @@ section[data-testid="stSidebar"] div[data-testid="stSelectbox"] div {
     margin-top: 12px;
     margin-bottom: 12px;
 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
 }
 
 .topic-title {
     font-size: 21px;
     font-weight: 700;
-    color: #222222;
+    color: #222222 !important;
 }
 
 .topic-translation {
     font-size: 19px;
-    color: #333333;
+    color: #333333 !important;
 }
 
 
-/* =========================
+/* ==========================================================
    QUIZ
-   ========================= */
+   ========================================================== */
 
 .quiz-card {
     background-color: #ffffff;
@@ -230,13 +248,28 @@ section[data-testid="stSidebar"] div[data-testid="stSelectbox"] div {
 
     margin-bottom: 15px;
 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.07);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
 }
 
 
-/* =========================
+/* Quiz question text */
+
+div[data-testid="stRadio"] label {
+    color: #222222 !important;
+}
+
+div[data-testid="stRadio"] label p {
+    color: #222222 !important;
+}
+
+div[data-testid="stRadio"] span {
+    color: #222222 !important;
+}
+
+
+/* ==========================================================
    RESULT
-   ========================= */
+   ========================================================== */
 
 .result-card {
     background-color: #ffffff;
@@ -249,13 +282,13 @@ section[data-testid="stSidebar"] div[data-testid="stSelectbox"] div {
 
     margin-top: 25px;
 
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
 }
 
 .result-score {
     font-size: 50px;
     font-weight: 800;
-    color: #111111;
+    color: #111111 !important;
 }
 
 </style>
@@ -293,25 +326,25 @@ selected_language = st.sidebar.selectbox(
 
 
 # ============================================================
-# HOME
+# HOME PAGE
 # ============================================================
 
 if page == "🏠 Home":
 
     st.markdown("""
-    <div class="hero">
+<div class="hero">
 
-        <div class="hero-title">
-            🇮🇳 Bharat Bhasha
-        </div>
-
-        <div class="hero-subtitle">
-            Discover and learn Indian languages
-            in a simple and interactive way.
-        </div>
-
+    <div class="hero-title">
+        🇮🇳 Bharat Bhasha
     </div>
-    """, unsafe_allow_html=True)
+
+    <div class="hero-subtitle">
+        Discover and learn Indian languages
+        in a simple and interactive way.
+    </div>
+
+</div>
+""", unsafe_allow_html=True)
 
 
     st.header("🌏 Learn a New Indian Language")
@@ -329,55 +362,55 @@ if page == "🏠 Home":
     with col1:
 
         st.markdown("""
-        <div class="card">
+<div class="card">
 
-            <div class="card-title">
-                📚 Learn
-            </div>
+    <div class="card-title">
+        📚 Learn
+    </div>
 
-            <div class="card-text">
-                Learn greetings, common words,
-                daily phrases and numbers.
-            </div>
+    <div class="card-text">
+        Learn greetings, common words,
+        daily phrases and numbers.
+    </div>
 
-        </div>
-        """, unsafe_allow_html=True)
+</div>
+""", unsafe_allow_html=True)
 
 
     with col2:
 
         st.markdown("""
-        <div class="card">
+<div class="card">
 
-            <div class="card-title">
-                🧠 Practice
-            </div>
+    <div class="card-title">
+        🧠 Practice
+    </div>
 
-            <div class="card-text">
-                Test your knowledge using
-                language-based quizzes.
-            </div>
+    <div class="card-text">
+        Test your knowledge using
+        language-based quizzes.
+    </div>
 
-        </div>
-        """, unsafe_allow_html=True)
+</div>
+""", unsafe_allow_html=True)
 
 
     with col3:
 
         st.markdown("""
-        <div class="card">
+<div class="card">
 
-            <div class="card-title">
-                📊 Track Progress
-            </div>
+    <div class="card-title">
+        📊 Track Progress
+    </div>
 
-            <div class="card-text">
-                Complete topics and track
-                your best quiz score.
-            </div>
+    <div class="card-text">
+        Complete topics and track
+        your best quiz score.
+    </div>
 
-        </div>
-        """, unsafe_allow_html=True)
+</div>
+""", unsafe_allow_html=True)
 
 
     st.markdown("---")
@@ -396,7 +429,7 @@ if page == "🏠 Home":
 
 
 # ============================================================
-# LEARN
+# LEARN PAGE
 # ============================================================
 
 elif page == "📚 Learn":
@@ -424,7 +457,6 @@ elif page == "📚 Learn":
     topic = st.selectbox(
         "Choose a topic",
         list(topic_names.keys()),
-
         format_func=lambda x: topic_names[x]
     )
 
@@ -441,18 +473,18 @@ elif page == "📚 Learn":
 
         st.markdown(
             f"""
-            <div class="topic-card">
+<div class="topic-card">
 
-                <div class="topic-title">
-                    {english}
-                </div>
+    <div class="topic-title">
+        {english}
+    </div>
 
-                <div class="topic-translation">
-                    ➜ {translation}
-                </div>
+    <div class="topic-translation">
+        ➜ {translation}
+    </div>
 
-            </div>
-            """,
+</div>
+""",
             unsafe_allow_html=True
         )
 
@@ -491,7 +523,7 @@ elif page == "📚 Learn":
 
 
 # ============================================================
-# QUIZ
+# QUIZ PAGE
 # ============================================================
 
 elif page == "🧠 Quiz":
@@ -528,12 +560,12 @@ elif page == "🧠 Quiz":
 
             st.markdown(
                 f"""
-                <div class="quiz-card">
+<div class="quiz-card">
 
-                    <b>Question {i + 1}</b>
+    <b>Question {i + 1}</b>
 
-                </div>
-                """,
+</div>
+""",
                 unsafe_allow_html=True
             )
 
@@ -557,11 +589,8 @@ elif page == "🧠 Quiz":
 
 
             selected_answer = st.radio(
-
                 question["question"],
-
                 option_labels,
-
                 key=f"quiz_{selected_language}_{i}"
             )
 
@@ -616,18 +645,18 @@ elif page == "🧠 Quiz":
 
         st.markdown(
             f"""
-            <div class="result-card">
+<div class="result-card">
 
-                <div class="result-score">
-                    {score}/{len(questions)}
-                </div>
+    <div class="result-score">
+        {score}/{len(questions)}
+    </div>
 
-                <h3>
-                    {percentage:.0f}%
-                </h3>
+    <h3>
+        {percentage:.0f}%
+    </h3>
 
-            </div>
-            """,
+</div>
+""",
             unsafe_allow_html=True
         )
 
@@ -667,7 +696,7 @@ elif page == "🧠 Quiz":
 
 
 # ============================================================
-# PROGRESS
+# PROGRESS PAGE
 # ============================================================
 
 elif page == "📊 Progress":
