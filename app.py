@@ -264,24 +264,23 @@ elif page == "📚 Learn":
         selected_language
     ][topic]
 
-    for english, translation in data.items():
+for native_word, english_meaning in data.items():
 
-        col1, col2 = st.columns(2)
+    col1, col2 = st.columns(2)
 
-        with col1:
+    with col1:
 
-            st.write(
-                f"**English:** {english}"
-            )
+        st.write(
+            f"**English:** {english_meaning}"
+        )
 
-        with col2:
+    with col2:
 
-            st.write(
-                f"**{selected_language}:** "
-                f"{translation}"
-            )
+        st.write(
+            f"**{selected_language}:** {native_word}"
+        )
 
-        st.divider()
+    st.divider()
 
     completed = st.session_state.progress[
         selected_language
